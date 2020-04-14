@@ -1,5 +1,5 @@
-const covid19ImpactEstimator = (data) => {
-  const input = {
+const covid19ImpactEstimator = () => {
+  const data = {
     region: {
       name: 'Africa',
       avgAge: 19.7,
@@ -14,21 +14,21 @@ const covid19ImpactEstimator = (data) => {
   };
 
   const impact = {};
-  impact.currentlyInfected = input.reportedCases * 10;
+  impact.currentlyInfected = data.reportedCases * 10;
   impact.infectionsByRequestedTime = impact.currentlyInfected * 512;
   impact.severeCasesByRequestedTime = 0.15 * impact.infectionsByRequestedTime;
-  impact.hospitalBedsByRequestedTime = 0.35 * input.totalHospitalBeds;
+  impact.hospitalBedsByRequestedTime = 0.35 * data.totalHospitalBeds;
   impact.casesForICUByRequestedTime = 0.05 * impact.infectionsByRequestedTime;
   impact.casesForVentilatorsByRequestedTime =
     0.02 * impact.infectionsByRequestedTime;
   impact.dollarsInFlight = (impact.infectionsByRequestedTime * 0.65 * 1.5) / 30;
 
   const severeImpact = {};
-  severeImpact.currentlyInfected = input.reportedCases * 50;
+  severeImpact.currentlyInfected = data.reportedCases * 50;
   severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * 512;
   severeImpact.severeCasesByRequestedTime =
     0.15 * severeImpact.infectionsByRequestedTime;
-  severeImpact.hospitalBedsByRequestedTime = 0.35 * input.totalHospitalBeds;
+  severeImpact.hospitalBedsByRequestedTime = 0.35 * data.totalHospitalBeds;
   severeImpact.casesForICUByRequestedTime =
     0.05 * severeImpact.infectionsByRequestedTime;
   severeImpact.casesForVentilatorsByRequestedTime =
@@ -36,7 +36,7 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.dollarsInFlight =
     (severeImpact.infectionsByRequestedTime * 0.65 * 1.5) / 30;
 
-  return { data: input, impact, severeImpact };
+  return { data, impact, severeImpact };
 };
 
 export default covid19ImpactEstimator;
